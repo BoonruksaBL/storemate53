@@ -1,17 +1,36 @@
-import {LOGIN,LOGOUT} from "./actionTypes"
-
-import type { LoginAction,LogoutAction } from "./authAction"
-
-export const login = (
-    payload:LoginAction["payload"]
-):LoginAction => ({
-    type:LOGIN,
-    payload
-
-})
+import { LOGIN,LOGOUT } from "./actionTypes";
 
 
+export type LoginAction = {
+    type: typeof LOGIN;
+    payload: {
+        token: string;
+        name: string; // มั่นใจว่ามี field นี้
+        isAuthenticated: true;
+    };
+};
+
+
+
+export type LogoutAction = {
+    type: typeof LOGOUT,
+}
+
+
+// แก้ไขตรงนี้: รับ name เพิ่มเข้ามา
+export const login = (data: { token: string; name: string }): LoginAction => ({
+  type: LOGIN,
+  payload: {
+    token: data.token,
+    name: data.name,
+    isAuthenticated: true,
+  },
+});
+
+// dispatch(login(response.token, response.user.name));
 
 export const logout = ():LogoutAction => ({
-    type:LOGOUT,
+    type:LOGOUT
 })
+
+export type AuthAction = LoginAction

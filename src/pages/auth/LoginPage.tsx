@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
+import type { AppDispatch } from "../../redux/store";
 import { login } from "../../redux/auth/action"; 
 import { AxiosError } from "axios";
 import Swal from "sweetalert2";
@@ -16,7 +17,7 @@ function LoginPage() {
 
   const [loading, setLoading] = useState(false);
   const [rememberMe, setRememberMe] = useState(false);
-  const dispatch = useDispatch();
+  const dispatch = useDispatch<AppDispatch>();
   const navigate = useNavigate();
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -43,7 +44,8 @@ function LoginPage() {
       const userName = form.email.split('@')[0]; 
 
       // 3. ✅ ส่งข้อมูลเข้า Redux (ส่ง token และ userName ที่เราสร้างขึ้น)
-      dispatch(login(token, userName));
+dispatch(login({ token, name: userName, isAuthenticated: true }));
+
 
       // 4. บันทึกข้อมูลลง Storage
       // เพิ่ม userName เข้าไปใน Object ที่จะเซฟด้วย เพื่อให้ Refresh แล้วชื่อไม่หาย
@@ -59,7 +61,7 @@ function LoginPage() {
       await Swal.fire({
         icon: "success",
         title: "Login Successful 🎉",
-        text: `Welcome, ${userName}!`,
+        text: Welcome, ${userName}!,
         timer: 1500,
         showConfirmButton: false,
       });
