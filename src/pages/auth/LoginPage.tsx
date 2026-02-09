@@ -5,7 +5,7 @@ import { login } from "../../redux/auth/action";
 import { AxiosError } from "axios";
 import Swal from "sweetalert2";
 import { loginService } from "../../services/auth.service";
-import { useNavigate } from "react-router";
+import { useNavigate } from "react-router-dom";
 import logo from "../../assets/logo.png";
 import auth from "../../assets/Auth.png";
 
@@ -44,7 +44,7 @@ function LoginPage() {
       const userName = form.email.split('@')[0]; 
 
       // 3. ✅ ส่งข้อมูลเข้า Redux (ส่ง token และ userName ที่เราสร้างขึ้น)
-dispatch(login({ token, name: userName, isAuthenticated: true }));
+dispatch(login({ token, name: userName }));
 
 
       // 4. บันทึกข้อมูลลง Storage
@@ -61,7 +61,7 @@ dispatch(login({ token, name: userName, isAuthenticated: true }));
       await Swal.fire({
         icon: "success",
         title: "Login Successful 🎉",
-        text: Welcome, ${userName}!,
+        text: `Welcome, ${userName}!`,
         timer: 1500,
         showConfirmButton: false,
       });
