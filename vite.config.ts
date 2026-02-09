@@ -5,5 +5,5 @@ import tailwindcss from '@tailwindcss/vite'
 export default defineConfig({
   plugins: [react(), tailwindcss()],
   // Use the repository name as the base when deploying to GitHub Pages
-  base: '/store-mate-app/',
+  base: '/storemate53/',
 })
